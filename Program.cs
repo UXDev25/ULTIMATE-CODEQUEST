@@ -90,9 +90,9 @@ class Program
                 Console.WriteLine(ChOneName);
                 name = Console.ReadLine();
 
-                if (name.Length == 0 || name.Length > 15) 
+                if (name.Length > 15 || String.IsNullOrWhiteSpace(name)) 
                 {
-                    while (name.Length == 0 || name.Length > 15)
+                    while (String.IsNullOrWhiteSpace(name) || name.Length > 15)
                     {
                         Console.WriteLine(NameError);
                         name = Console.ReadLine();
