@@ -19,17 +19,18 @@ class Program
 
         //CHAPTER ONE
         const string ChOneTitle = "===== CHAPTER ONE =====";
-        const string ChOneBegin = "Welcome to the arcane academy! Let's start training your magic power in the next 5 days";
-        const string ChOneName = "Please choose your wizard name:";
+        const string ChOneBegin = "Welcome to the arcane academy! Let's start training your magic power in the next 5 days.";
+        const string ChOneName = "Please choose your wizard name (max of 15 characters):";
         const string PowerNoob = "You are weak, you think that spoons are the same that magic wands...";
         const string PowerPro = "Almost there! At least you can conjure little magic breezes...";
-        const string PowerHacker = "Yeah! your power is pretty impressive! you can invoke all sorts of dragons and conjure different spells";
-        const string PowerGod = "Congratulations! your power is worth of an arcane master! Your knowldedge is unlimited";
+        const string PowerHacker = "Yeah! your power is pretty impressive! you can invoke all sorts of dragons and conjure different spells.";
+        const string PowerGod = "Congratulations! your power is worth of an arcane master! Your knowldedge is unlimited.";
+        const string NameError = "Invalid name, please input a name with at least one character and shorter than 15 characters.";
 
-        const string LevelNoob = ", The Bread Head, That's your level";
-        const string LevelPro = " Peppermint, That's your level";
-        const string LevelHacker = ", The red magician, That's your level";
-        const string LevelGod = ", Jujutsu of Oblivion, That's your level";
+        const string LevelNoob = ", The Bread Head, That's your level.";
+        const string LevelPro = " Peppermint, That's your level.";
+        const string LevelHacker = ", The red magician, That's your level.";
+        const string LevelGod = ", Jujutsu of Oblivion, That's your level.";
 
         string name;
         var randomNum = new Random();
@@ -88,6 +89,15 @@ class Program
                 Console.WriteLine(ChOneBegin);
                 Console.WriteLine(ChOneName);
                 name = Console.ReadLine();
+
+                if (name.Length == 0 || name.Length > 15) 
+                {
+                    while (name.Length == 0 || name.Length > 15)
+                    {
+                        Console.WriteLine(NameError);
+                        name = Console.ReadLine();
+                    }
+                }
 
                 for (int i = 1; i <= 5; i++)
                 {
