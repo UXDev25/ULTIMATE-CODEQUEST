@@ -32,12 +32,12 @@ class Program
         const string LevelHacker = ", The red magician, That's your level.";
         const string LevelGod = ", Jujutsu of Oblivion, That's your level.";
 
-        string name;
+        string? name;
         var randomNum = new Random();
         int totalPow = 0;
         int actualPow = 0;
         //CHAPTER TWO
-        const string ChTwoTitle = "===== CHAPTER TWO =====";
+        //const string ChTwoTitle = "===== CHAPTER TWO =====";
 
         do
         {
@@ -90,7 +90,7 @@ class Program
                 Console.WriteLine(ChOneName);
                 name = Console.ReadLine();
 
-                if (name.Length > 15 || String.IsNullOrWhiteSpace(name)) 
+                if (String.IsNullOrWhiteSpace(name) || name.Length > 15) 
                 {
                     while (String.IsNullOrWhiteSpace(name) || name.Length > 15)
                     {
