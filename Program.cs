@@ -40,15 +40,15 @@ class Program
 
         //CHAPTER TWO
         const string ChTwoTitle = "===== CHAPTER TWO =====";
-        const string ChTwoBegin = "Benvingut poderos mag! Acabes d'entrar dins el calabos del temible drac RAMon... Encerta tots els codis de les 3 portes i guanyaras!";
-        const string DoorMsg = "Inserta un nombre del 1 al 5, estas a la porta numero: ";
-        const string DoorPass = "El drac et respecta. Has desbloquejat el següent nivell!";
-        const string DoorWrong = "Codi incorrecte! Rapid, Prova amb un altre, que nomes et queda/en aquest/s intent/s: ";
-        const string DoorDeath = "El drac ha detectat la teva presència i t’ha expulsat del servidor!";
-        const string DoorFinal = "Has desbloquejat el nivell final. Prepara’t per la batalla!";
-        const string DoorError = "Has trencat el candau... aixo ha alertat al drac RAMon, recorda que NOMES POTS POSAR UN NOMBRE DEL 1 AL 5!";
+        const string ChTwoBegin = "Welcome mighty wizard! You have just entered the dungeon of the fearsome dragon RAMon... Guess all the codes for the 3 doors and you will win!";
+        const string DoorMsg = "Insert a number from 1 to 5, you are at door number: ";
 
-        var randomNum2 = new Random();
+        const string DoorPass = "The dragon respects you. You have unlocked the next level!";
+        const string DoorWrong = "Incorrect code! Quick, try another one, you only have this/these attempt/s left: ";
+        const string DoorDeath = "The dragon has detected your presence and kicked you from the server!";
+        const string DoorFinal = "You have unlocked the final level. Prepare for battle!";
+        const string DoorError = "You broke the lock... this has alerted the dragon RAMon, remember YOU CAN ONLY ENTER A NUMBER FROM 1 TO 5!";
+
         int code = 0; 
         int num;
         bool stupid = false;
@@ -156,7 +156,7 @@ class Program
                 for (int i = 1; i <= 3; i++) 
                 {
                     Console.WriteLine(DoorMsg + i);
-                    code = randomNum2.Next(1,5);
+                    code = randomNum.Next(1,5);
                     num = Int32.Parse(Console.ReadLine());
                     if (num <= 0 || num > 5) 
                     {
