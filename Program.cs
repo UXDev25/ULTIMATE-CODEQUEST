@@ -40,18 +40,31 @@ class Program
 
         //CHAPTER TWO
         const string ChTwoTitle = "===== CHAPTER TWO =====";
-        const string ChTwoBegin = "Benvingut poderos mag! Acabes d'entrar dins el calabos del temible drac RAMon... Encerta tots els codis de les 3 portes i guanyaras!";
-        const string DoorMsg = "Inserta un nombre del 1 al 5, estas a la porta numero: ";
-        const string DoorPass = "El drac et respecta. Has desbloquejat el següent nivell!";
-        const string DoorWrong = "Codi incorrecte! Rapid, Prova amb un altre, que nomes et queda/en aquest/s intent/s: ";
-        const string DoorDeath = "El drac ha detectat la teva presència i t’ha expulsat del servidor!";
-        const string DoorFinal = "Has desbloquejat el nivell final. Prepara’t per la batalla!";
-        const string DoorError = "Has trencat el candau... aixo ha alertat al drac RAMon, recorda que NOMES POTS POSAR UN NOMBRE DEL 1 AL 5!";
+        const string ChTwoBegin = "Welcome mighty wizard! You have just entered the dungeon of the fearsome dragon RAMon... Guess all the codes for the 3 doors and you will win!";
+        const string DoorMsg = "Insert a number from 1 to 5, you are at door number: ";
+        const string DoorPass = "The dragon respects you. You have unlocked the next level!";
+        const string DoorWrong = "Incorrect code! Quick, try another one, you only have this/these attempt/s left: ";
+        const string DoorDeath = "The dragon has detected your presence and kicked you from the server!";
+        const string DoorFinal = "You have unlocked the final level. Prepare for battle!";
+        const string DoorError = "You broke the lock... this has alerted the dragon RAMon, remember YOU CAN ONLY ENTER A NUMBER FROM 1 TO 5!";
 
-        var randomNum2 = new Random();
+
         int code = 0; 
         int num;
         bool stupid = false;
+
+        //CHAPTER THREE 
+        const string ChThreeTitle = "===== CHAPTER THREE =====";
+        const string ChThreeBegin = "You defeated the dragon! Now its time to mine some bits and return home with a glorious booty! You can mine no more than 5 times, PRESS 'ENTER' TO MINE";
+        const string MinedMsg = "This time you mined this number of bits: ";
+        const string MineAttemps = "Times you can mine remaining: ";
+        const string NoMinedMsg = "Today is not your lucky day, you found 0 bits.";
+        const string Result = "TOTAL OF BITS: ";
+        const string PlusTwoHun = "You have unlocked the golden GPU! Your spells now run at 120 FPS!";
+        const string LessTwoHun = "Your magic card is still integrated. Time to defeat another dragon!";
+
+        int totalMined = 0;
+        int actualMined = 0;
 
         do
         {
@@ -98,7 +111,7 @@ class Program
 
             if (op == 1)
             {
-                //CHAPTER 1:
+                //CHAPTER 1 CODE:
                 Console.WriteLine(ChOneTitle);
                 Console.WriteLine(ChOneBegin);
                 Console.WriteLine(ChOneName);
@@ -148,22 +161,22 @@ class Program
                 }
 
             }
-            else if (op == 2) 
+            else if (op == 2)
             {
-                //CHAPTER 2
+                //CHAPTER 2 CODE:
                 Console.WriteLine(ChTwoTitle);
                 Console.WriteLine(ChTwoBegin);
-                for (int i = 1; i <= 3; i++) 
+                for (int i = 1; i <= 3; i++)
                 {
                     Console.WriteLine(DoorMsg + i);
-                    code = randomNum2.Next(1,5);
+                    code = randomNum.Next(1, 5);
                     num = Int32.Parse(Console.ReadLine());
-                    if (num <= 0 || num > 5) 
+                    if (num <= 0 || num > 5)
                     {
                         Console.WriteLine(DoorError);
                         stupid = true;
                     }
-                    for (int j = 2; j > 0 && num != code && stupid == false; j--) 
+                    for (int j = 2; j > 0 && num != code && stupid == false; j--)
                     {
                         Console.WriteLine(DoorWrong + j);
                         num = Int32.Parse(Console.ReadLine());
@@ -174,15 +187,47 @@ class Program
                         i = 4;
                         op = 0;
                     }
-                    else 
+                    else
                     {
                         Console.WriteLine(DoorPass);
                     }
 
                 }
-                if (op != 0) 
+                if (op != 0)
                 {
                     Console.WriteLine(DoorFinal);
+                }
+            }
+            else if (op == 3) 
+            {
+                //CHAPTER 3 CODE:
+                Console.WriteLine(ChThreeTitle);
+                Console.WriteLine(ChThreeBegin);
+                for (int i = 4; i >= 0; i--) 
+                {
+                    Console.ReadLine();
+                    actualMined = randomNum.Next(5, 65);
+                    if (actualMined >= 51)
+                    {
+                        Console.WriteLine(NoMinedMsg);
+                        actualMined = 0;
+                    }
+                    else 
+                    {
+                        Console.WriteLine(MinedMsg + actualMined);
+                    }
+                    totalMined = totalMined + actualMined;
+                    actualMined = 0;
+                    Console.WriteLine(MineAttemps + i);
+                    Console.WriteLine(Result + totalMined);
+                }
+                if (totalMined >= 200)
+                {
+                    Console.WriteLine(PlusTwoHun);
+                }
+                else 
+                {
+                    Console.WriteLine(LessTwoHun);
                 }
             }
 
