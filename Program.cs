@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters;
 
 class Program
 {
@@ -36,8 +37,21 @@ class Program
         var randomNum = new Random();
         int totalPow = 0;
         int actualPow = 0;
+
         //CHAPTER TWO
-        //const string ChTwoTitle = "===== CHAPTER TWO =====";
+        const string ChTwoTitle = "===== CHAPTER TWO =====";
+        const string ChTwoBegin = "Benvingut poderos mag! Acabes d'entrar dins el calabos del temible drac RAMon... Encerta tots els codis de les 3 portes i guanyaras!";
+        const string DoorMsg = "Inserta un nombre del 1 al 5, estas a la porta numero: ";
+        const string DoorPass = "El drac et respecta. Has desbloquejat el següent nivell!";
+        const string DoorWrong = "Codi incorrecte! Rapid, Prova amb un altre, que nomes et queda/en aquest/s intent/s: ";
+        const string DoorDeath = "El drac ha detectat la teva presència i t’ha expulsat del servidor!";
+        const string DoorFinal = "Has desbloquejat el nivell final. Prepara’t per la batalla!";
+        const string DoorError = "Has trencat el candau... aixo ha alertat al drac RAMon, recorda que NOMES POTS POSAR UN NOMBRE DEL 1 AL 5!";
+
+        var randomNum2 = new Random();
+        int code = 0; 
+        int num;
+        bool stupid = false;
 
         do
         {
@@ -80,9 +94,9 @@ class Program
                 Console.WriteLine(InputErrorMessage);
             }
 
-            
 
-            if (op == 1) 
+
+            if (op == 1)
             {
                 //CHAPTER 1:
                 Console.WriteLine(ChOneTitle);
@@ -90,7 +104,7 @@ class Program
                 Console.WriteLine(ChOneName);
                 name = Console.ReadLine();
 
-                if (String.IsNullOrWhiteSpace(name) || name.Length > 15) 
+                if (String.IsNullOrWhiteSpace(name) || name.Length > 15)
                 {
                     while (String.IsNullOrWhiteSpace(name) || name.Length > 15)
                     {
@@ -108,7 +122,7 @@ class Program
                     Console.ReadLine();
                 }
 
-                switch (totalPow) 
+                switch (totalPow)
                 {
                     case <= 20:
                         Console.WriteLine(PowerNoob);
@@ -133,6 +147,43 @@ class Program
 
                 }
 
+            }
+            else if (op == 2) 
+            {
+                //CHAPTER 2
+                Console.WriteLine(ChTwoTitle);
+                Console.WriteLine(ChTwoBegin);
+                for (int i = 1; i <= 3; i++) 
+                {
+                    Console.WriteLine(DoorMsg + i);
+                    code = randomNum2.Next(1,5);
+                    num = Int32.Parse(Console.ReadLine());
+                    if (num <= 0 || num > 5) 
+                    {
+                        Console.WriteLine(DoorError);
+                        stupid = true;
+                    }
+                    for (int j = 2; j > 0 && num != code && stupid == false; j--) 
+                    {
+                        Console.WriteLine(DoorWrong + j);
+                        num = Int32.Parse(Console.ReadLine());
+                    }
+                    if (num != code && stupid == true)
+                    {
+                        Console.WriteLine(DoorDeath);
+                        i = 4;
+                        op = 0;
+                    }
+                    else 
+                    {
+                        Console.WriteLine(DoorPass);
+                    }
+
+                }
+                if (op != 0) 
+                {
+                    Console.WriteLine(DoorFinal);
+                }
             }
 
         } while (op != 0);
