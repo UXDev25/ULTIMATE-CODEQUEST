@@ -181,7 +181,7 @@ class Program
                         Console.WriteLine(DoorWrong + j);
                         num = Int32.Parse(Console.ReadLine());
                     }
-                    if (num != code && stupid == true)
+                    if (num != code || stupid == true)
                     {
                         Console.WriteLine(DoorDeath);
                         i = 4;
