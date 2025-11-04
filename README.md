@@ -62,19 +62,54 @@ OUTPUT:
 | 1 | \- | {System.Random} | 0 | 0 | false | \- | 2 | 1 | i \<= 3 \-\> TRUE |
 | 1 | 1 | 4 | 4 | 4 | \- | \- | \- | 1 | i \<= 3 \-\> TRUE |
 | 2 | \- | 4 | 4 | 4 | false | 2 | \- | 1 |  (j \> 0 && num \!= code && stupid \== false) \-\> FALSE |
-| 3 | \- | 4 | 4 | 4 | false | \- | \- | 1 | (num \!= code && stupid \== true) \-\> FALSE |
+| 3 | \- | 4 | 4 | 4 | false | \- | \- | 1 | (num \!= code || stupid \== true) \-\> FALSE |
 | 1 | 2 | 2 | 3 | 2 | \- | \- | \- | 2 |  i \<= 3 \-\> TRUE |
 | 2 | \- | 2 | 3 | 2 | false | 2 | \- | 2 | (j \> 0 && num \!= code && stupid \== false) \-\> TRUE |
 | 2 | 1 | 2 | 2 | 2 | false | 1 | \- | 2 | (j \> 0 && num \!= code && stupid \== false) \-\> FALSE |
-| 3 | \- | 2 | 2 | 2 | false | \- | \- | 2 | (num \!= code && stupid \== true) \-\> FALSE |
+| 3 | \- | 2 | 2 | 2 | false | \- | \- | 2 | (num \!= code || stupid \== true) \-\> FALSE |
 | 1 | 3 | 2 | 5 | 2 | \- | \- | \- | 3 | i \<= 3 \-\> TRUE |
 | 2 | \- | 2 | 5 | 2 | false | 2 | \- | 3 |  (j \> 0 && num \!= code && stupid \== false) \-\> TRUE |
 | 2 | 1 | 2 | 1 | 2 | false | 1 | \- | 3 |  (j \> 0 && num \!= code && stupid \== false) \-\> TRUE |
-| 2 | 2 | 2 | 2 | 2 | false | 0 | \- | 5 | (j \> 0 && num \!= code && stupid \== false) \-\> FALSE |
-| 3 | \- | 2 | 2 | 2 | false | \- | \- | 3 | (num \!= code && stupid \== true) \-\> FALSE |
+| 2 | 2 | 2 | 2 | 2 | false | 0 | \- | 3 | (j \> 0 && num \!= code && stupid \== false) \-\> FALSE |
+| 3 | \- | 2 | 2 | 2 | false | \- | \- | 3 | (num \!= code || stupid \== true) \-\> FALSE |
 | 1 | \- | {System.Random} | 2 | \- | \- | \- | \- | 4 | i \<= 3 \-\> FALSE |
 | 4 | \- |  | \- | \- | \- | \- | 2 | \- | op \!= 0 \-\> TRUE |
 
 OUTPUT: 
 
 - **"You have unlocked the final level. Prepare for battle\!"**
+
+**Lose Case: num \= 4,3,2 (for each iteration)**
+
+| instructions | iterations | variables |  |  |  |  |  |  | condition |
+| :---- | :---- | ----- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| \- | \- | randomNum | num | code | stupid | j | op | i | \- |
+| 1 | \- | {System.Random} | 0 | 0 | false | \- | 2 | 1 | i \<= 3 \-\> TRUE |
+| 1 | 1 | 1 | 4 | 1 | \- | \- | \- | 1 | i \<= 3 \-\> TRUE |
+| 2 | \- | 1 | 4 | 1 | false | 2 | \- | 1 |  (j \> 0 && num \!= code && stupid \== false) \-\> TRUE |
+| 2 | 1 | 1 | 3 | 1 | false | 1 | \- | 1 | (j \> 0 && num \!= code && stupid \== false) \-\> TRUE |
+| 2 | 2 | 1 | 2 | 1 | \- | 0 | \- | 1 |  (j \> 0 && num \!= code && stupid \== false) \-\> TRUE |
+| 2 | 3 | 1 | 2 | 1 | false | \-1 | \- | 1 |  (j \> 0 && num \!= code && stupid \== false) \-\> FALSE |
+| 3 | 1 | 1 | 2 | 1 | false | \- | 0 | 1 | (num \!= code && stupid \== true) \-\> TRUE |
+| 4 | \- |  | \- | \- | \- | \- | 0 | \- | op \!= 0 \-\> FALSE |
+
+OUTPUT: 
+
+- **"The dragon has detected your presence and kicked you from the server\!"**
+
+**Error Case: num \= 6** 
+
+| instructions | iterations | variables |  |  |  |  |  |  | condition |
+| :---- | :---- | ----- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| \- | \- | randomNum | num | code | stupid | j | op | i | \- |
+| 1 | \- | {System.Random} | 0 | 0 | false | \- | 2 | 1 | i \<= 3 \-\> TRUE |
+| 1 | 1 | \- | 6 | \- | true | \- | \- | 1 | i \<= 3 \-\> TRUE |
+| 2 | \- | 6 |  | 1 | true | 2 | \- | 1 |  (j \> 0 && num \!= code && stupid \== false) \-\> FALSE |
+| 3 | 1 | 1 | 6 | 1 | true | 1 | 0 | 1 | (num \!= code && stupid \== true) \-\> TRUE |
+| 4 | \- |  | \- | \- | true | \- | 0 | \- | op \!= 0 \-\> FALSE |
+
+OUTPUT: 
+
+- **You broke the lock... this has alerted the dragon RAMon, remember YOU CAN ONLY ENTER A NUMBER FROM 1 TO 5\!**  
+- **"The dragon has detected your presence and kicked you from the server\!"**
+
